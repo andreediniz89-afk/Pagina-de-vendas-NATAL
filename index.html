@@ -153,15 +153,7 @@ summary::after{content:"+";position:absolute;right:16px;top:50%;width:28px;heigh
 details[open] summary::after{content:"\2212"}
 details p{padding:0 20px 18px;color:var(--soft);font-size:16px}
 .final{margin-top:34px}
-footer{background:var(--pine-d);color:#a9c7bb;font-size:13px;line-height:1.6;text-align:center;padding:30px 0 110px}
-
-/* ===== barra fixa (celular) ===== */
-.barra{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:14px;align-items:center;justify-content:center;
-  background:rgba(116,6,26,.97);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(112%);transition:transform .25s ease;box-shadow:0 -8px 24px rgba(0,0,0,.3)}
-.barra.on{transform:none}
-.barra .p{font-family:var(--display);font-weight:900;font-size:24px;color:var(--gold);white-space:nowrap}
-.barra .cta{padding:13px 22px;font-size:16px;flex:1;max-width:280px;box-shadow:0 4px 0 #c98a00}
-.barra .cta::after{display:none}
+footer{background:var(--pine-d);color:#a9c7bb;font-size:13px;line-height:1.6;text-align:center;padding:30px 0 34px}
 
 /* ===== telas maiores ===== */
 @media (min-width:640px){
@@ -186,14 +178,11 @@ footer{background:var(--pine-d);color:#a9c7bb;font-size:13px;line-height:1.6;tex
   .selos{justify-content:flex-start}
   .mock{margin-top:0}
   h1 .sc{transform-origin:left center}
-  .barra{display:none}
-  footer{padding-bottom:34px}
   .sec{padding:84px 0}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .neve,.mock,.luzes i,.cta::after{animation:none}
-  .barra{transition:none}
 }
 </style>
 </head>
@@ -338,26 +327,16 @@ footer{background:var(--pine-d);color:#a9c7bb;font-size:13px;line-height:1.6;tex
   </div>
 </footer>
 
-<div class="barra" id="barra" aria-hidden="true">
-  <span class="p" data-preco></span>
-  <a class="cta" href="#oferta" tabindex="-1">Quero o guia</a>
-</div>
 
 <script>
 /* ===== CONFIGURE AQUI ===== */
-var PRECO = "R$ 29,00";   // preço do guia
+var PRECO = "R$ 29,90";   // preço do guia
 var LINK  = "https://pay.cakto.com.br/gfugp4m_1287197";   // link do checkout (Cakto)
 /* ========================== */
 document.querySelectorAll("[data-preco]").forEach(function(e){e.textContent=PRECO});
 if(LINK!=="#oferta"){document.querySelectorAll(".cta").forEach(function(a){a.href=LINK})}
 var ba=document.getElementById("ba");
 ba.querySelector("input").addEventListener("input",function(e){ba.style.setProperty("--pos",e.target.value+"%")});
-var barra=document.getElementById("barra"),vt=true,vo=false;
-function up(){var on=!vt&&!vo;barra.classList.toggle("on",on);barra.setAttribute("aria-hidden",on?"false":"true");barra.querySelector("a").tabIndex=on?0:-1}
-if("IntersectionObserver" in window){
-  new IntersectionObserver(function(e){vt=e[0].isIntersecting;up()}).observe(document.getElementById("cta-topo"));
-  new IntersectionObserver(function(e){vo=e[0].isIntersecting;up()},{threshold:.15}).observe(document.getElementById("oferta"));
-}
 </script>
 </body>
 </html>
